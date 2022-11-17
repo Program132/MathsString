@@ -77,7 +77,7 @@ std::tuple<bool, int> expectDiv(std::vector<std::string> array) {
 }
 
 int main() {
-    std::string content = "10 + 25 * 3 / 2";
+    std::string content = "10 + 25 * 3 / 2 - 5";
 
     std::vector<std::string> contentSplitted = split(content);
 
@@ -106,6 +106,38 @@ int main() {
         contentSplitted[caseVectorDiv - 1] = std::to_string(result);
         contentSplitted[caseVectorDiv] = "N/A";
         contentSplitted[caseVectorDiv + 1] = "N/A";
+
+        while (hasElementNA(contentSplitted)) {
+            auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
+            contentSplitted.erase(it);
+        }
+    }
+
+    auto [operatorAdd, caseVectorAdd] = expectAdd(contentSplitted);
+
+    if (operatorAdd) {
+        int n1 = convertInt(contentSplitted[caseVectorAdd-1]);
+        int n2 = convertInt(contentSplitted[caseVectorAdd+1]);
+        int result = n1 + n2;
+        contentSplitted[caseVectorAdd - 1] = std::to_string(result);
+        contentSplitted[caseVectorAdd] = "N/A";
+        contentSplitted[caseVectorAdd + 1] = "N/A";
+
+        while (hasElementNA(contentSplitted)) {
+            auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
+            contentSplitted.erase(it);
+        }
+    }
+
+    auto [operatorRemove, caseVectorRemove] = expectRemove(contentSplitted);
+
+    if (operatorRemove) {
+        int n1 = convertInt(contentSplitted[caseVectorRemove-1]);
+        int n2 = convertInt(contentSplitted[caseVectorRemove+1]);
+        int result = n1 - n2;
+        contentSplitted[caseVectorRemove - 1] = std::to_string(result);
+        contentSplitted[caseVectorRemove] = "N/A";
+        contentSplitted[caseVectorRemove + 1] = "N/A";
 
         while (hasElementNA(contentSplitted)) {
             auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");

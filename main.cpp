@@ -6,6 +6,18 @@
 #include <algorithm>
 #include <tuple>
 
+int convertInt(std::string& n) {
+    try {
+        int v = std::stoi(n);
+        return v;
+    }
+    catch (std::invalid_argument const& ex) {
+        std::cout << "It can not be a int value !" << " Final error: " << ex.what() << std::endl;
+    }
+
+    return 0;
+}
+
 std::vector<std::string> split(std::string& arg) {
     std::string myBuffer;
 
@@ -63,7 +75,7 @@ int main() {
 
     auto [operatorMulti, caseVector] = expectMulti(contentSplitted);
 
-    std::cout << operatorMulti << " : " << caseVector << std::endl;
+
 
     return 0;
 }

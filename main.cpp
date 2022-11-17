@@ -191,10 +191,8 @@ int main() {
         i++;
     }
 
-
-    for (auto const& e : contentSplitted) {
-        std::cout << e << std::endl;
-    }
+    int final_result = convertInt(contentSplitted[0]);
+    std::cout << final_result << std::endl;
 
     return 0;
 }

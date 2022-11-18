@@ -31,8 +31,8 @@ std::vector<std::string> split(std::string& arg) {
     return myVec;
 }
 
-bool hasElementNA(std::vector<std::string> array) {
-    auto res = std::find(begin(array), end(array), "N/A");
+bool hasElement(std::vector<std::string> array, std::string element) {
+    auto res = std::find(begin(array), end(array), element);
 
     if (res != array.end()) {
         return true;
@@ -40,73 +40,8 @@ bool hasElementNA(std::vector<std::string> array) {
     return false;
 }
 
-bool hasElementMulti(std::vector<std::string> array) {
-    auto res = std::find(begin(array), end(array), "*");
-
-    if (res != array.end()) {
-        return true;
-    }
-    return false;
-}
-
-bool hasElementDiv(std::vector<std::string> array) {
-    auto res = std::find(begin(array), end(array), "/");
-
-    if (res != array.end()) {
-        return true;
-    }
-    return false;
-}
-
-bool hasElementAdd(std::vector<std::string> array) {
-    auto res = std::find(begin(array), end(array), "+");
-
-    if (res != array.end()) {
-        return true;
-    }
-    return false;
-}
-
-bool hasElementRemove(std::vector<std::string> array) {
-    auto res = std::find(begin(array), end(array), "-");
-
-    if (res != array.end()) {
-        return true;
-    }
-    return false;
-}
-
-
-
-int expectMulti(std::vector<std::string> array) {
-    auto res = std::find(begin(array), end(array), "*");
-
-    if (res != array.end()) {
-        return std::distance(array.begin(), res);
-    }
-    return 0;
-}
-
-int expectDiv(std::vector<std::string> array) {
-    auto res = std::find(begin(array), end(array), "/");
-
-    if (res != array.end()) {
-        return std::distance(array.begin(), res);
-    }
-    return 0;
-}
-
-int expectAdd(std::vector<std::string> array) {
-    auto res = std::find(begin(array), end(array), "+");
-
-    if (res != array.end()) {
-        return std::distance(array.begin(), res);
-    }
-    return 0;
-}
-
-int expectRemove(std::vector<std::string> array) {
-    auto res = std::find(begin(array), end(array), "-");
+int expectElement(std::vector<std::string> array, std::string element) {
+    auto res = std::find(begin(array), end(array), element);
 
     if (res != array.end()) {
         return std::distance(array.begin(), res);
@@ -124,8 +59,8 @@ int main() {
 
     while (i < totalSizeVector) {
 
-        while (hasElementMulti(contentSplitted)) {
-            auto caseVectorMulti = expectMulti(contentSplitted);
+        while (hasElement(contentSplitted, "*")) {
+            auto caseVectorMulti = expectElement(contentSplitted, "*");
 
             int n1 = convertInt(contentSplitted[caseVectorMulti - 1]);
             int n2 = convertInt(contentSplitted[caseVectorMulti + 1]);
@@ -134,15 +69,15 @@ int main() {
             contentSplitted[caseVectorMulti] = "N/A";
             contentSplitted[caseVectorMulti + 1] = "N/A";
 
-            while (hasElementNA(contentSplitted)) {
+            while (hasElement(contentSplitted, "N/A")) {
                 auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
                 contentSplitted.erase(it);
             }
         }
 
 
-        while (hasElementDiv(contentSplitted)) {
-            auto caseVectorDiv = expectDiv(contentSplitted);
+        while (hasElement(contentSplitted, "/")) {
+            auto caseVectorDiv = expectElement(contentSplitted, "/");
 
             int n1 = convertInt(contentSplitted[caseVectorDiv-1]);
             int n2 = convertInt(contentSplitted[caseVectorDiv+1]);
@@ -151,14 +86,14 @@ int main() {
             contentSplitted[caseVectorDiv] = "N/A";
             contentSplitted[caseVectorDiv + 1] = "N/A";
 
-            while (hasElementNA(contentSplitted)) {
+            while (hasElement(contentSplitted, "N/A")) {
                 auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
                 contentSplitted.erase(it);
             }
         }
 
-        while (hasElementAdd(contentSplitted)) {
-            auto caseVectorAdd = expectAdd(contentSplitted);
+        while (hasElement(contentSplitted, "+")) {
+            auto caseVectorAdd = expectElement(contentSplitted, "+");
 
             int n1 = convertInt(contentSplitted[caseVectorAdd-1]);
             int n2 = convertInt(contentSplitted[caseVectorAdd+1]);
@@ -167,14 +102,14 @@ int main() {
             contentSplitted[caseVectorAdd] = "N/A";
             contentSplitted[caseVectorAdd + 1] = "N/A";
 
-            while (hasElementNA(contentSplitted)) {
+            while (hasElement(contentSplitted, "N/A")) {
                 auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
                 contentSplitted.erase(it);
             }
         }
 
-        while (hasElementRemove(contentSplitted)) {
-            auto caseVectorRemove = expectRemove(contentSplitted);
+        while (hasElement(contentSplitted, "-")) {
+            auto caseVectorRemove = expectElement(contentSplitted, "-");
 
             int n1 = convertInt(contentSplitted[caseVectorRemove-1]);
             int n2 = convertInt(contentSplitted[caseVectorRemove+1]);
@@ -183,7 +118,7 @@ int main() {
             contentSplitted[caseVectorRemove] = "N/A";
             contentSplitted[caseVectorRemove + 1] = "N/A";
 
-            while (hasElementNA(contentSplitted)) {
+            while (hasElement(contentSplitted, "N/A")) {
                 auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
                 contentSplitted.erase(it);
             }

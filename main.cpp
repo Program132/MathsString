@@ -49,10 +49,34 @@ int expectElement(std::vector<std::string> array, std::string element) {
     return 0;
 }
 
+void operations(std::vector<std::string>& array, int& caseVector, std::string op) {
+    int n1 = convertInt(array[caseVector-1]);
+    int n2 = convertInt(array[caseVector+1]);
+    int result = 0;
+    if (op == "-") {
+        result = n1 - n2;
+    } else if (op == "+") {
+        result = n1 + n2;
+    } else if (op == "*") {
+        result = n1 * n2;
+    } else if (op == "/") {
+        result = n1 / n2;
+    }
+    array[caseVector - 1] = std::to_string(result);
+    array[caseVector] = "N/A";
+    array[caseVector + 1] = "N/A";
+
+    while (hasElement(array, "N/A")) {
+        auto it = std::find(begin(array), end(array), "N/A");
+        array.erase(it);
+    }
+}
+
 int main() {
-    std::string content = "3 * 5 + 2 * 2 - 1";
+    std::string content = "9 + 10";
 
     std::vector<std::string> contentSplitted = split(content);
+
     int totalSizeVector = contentSplitted.size();
 
     int i = 0;
@@ -61,67 +85,23 @@ int main() {
 
         while (hasElement(contentSplitted, "*")) {
             auto caseVectorMulti = expectElement(contentSplitted, "*");
-
-            int n1 = convertInt(contentSplitted[caseVectorMulti - 1]);
-            int n2 = convertInt(contentSplitted[caseVectorMulti + 1]);
-            int result = n1 * n2;
-            contentSplitted[caseVectorMulti - 1] = std::to_string(result);
-            contentSplitted[caseVectorMulti] = "N/A";
-            contentSplitted[caseVectorMulti + 1] = "N/A";
-
-            while (hasElement(contentSplitted, "N/A")) {
-                auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
-                contentSplitted.erase(it);
-            }
+            operations(contentSplitted, caseVectorMulti, "*");
         }
 
 
         while (hasElement(contentSplitted, "/")) {
             auto caseVectorDiv = expectElement(contentSplitted, "/");
-
-            int n1 = convertInt(contentSplitted[caseVectorDiv-1]);
-            int n2 = convertInt(contentSplitted[caseVectorDiv+1]);
-            int result = n1 / n2;
-            contentSplitted[caseVectorDiv - 1] = std::to_string(result);
-            contentSplitted[caseVectorDiv] = "N/A";
-            contentSplitted[caseVectorDiv + 1] = "N/A";
-
-            while (hasElement(contentSplitted, "N/A")) {
-                auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
-                contentSplitted.erase(it);
-            }
+            operations(contentSplitted, caseVectorDiv, "/");
         }
 
         while (hasElement(contentSplitted, "+")) {
             auto caseVectorAdd = expectElement(contentSplitted, "+");
-
-            int n1 = convertInt(contentSplitted[caseVectorAdd-1]);
-            int n2 = convertInt(contentSplitted[caseVectorAdd+1]);
-            int result = n1 + n2;
-            contentSplitted[caseVectorAdd - 1] = std::to_string(result);
-            contentSplitted[caseVectorAdd] = "N/A";
-            contentSplitted[caseVectorAdd + 1] = "N/A";
-
-            while (hasElement(contentSplitted, "N/A")) {
-                auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
-                contentSplitted.erase(it);
-            }
+            operations(contentSplitted, caseVectorAdd, "+");
         }
 
         while (hasElement(contentSplitted, "-")) {
             auto caseVectorRemove = expectElement(contentSplitted, "-");
-
-            int n1 = convertInt(contentSplitted[caseVectorRemove-1]);
-            int n2 = convertInt(contentSplitted[caseVectorRemove+1]);
-            int result = n1 - n2;
-            contentSplitted[caseVectorRemove - 1] = std::to_string(result);
-            contentSplitted[caseVectorRemove] = "N/A";
-            contentSplitted[caseVectorRemove + 1] = "N/A";
-
-            while (hasElement(contentSplitted, "N/A")) {
-                auto it = std::find(begin(contentSplitted), end(contentSplitted), "N/A");
-                contentSplitted.erase(it);
-            }
+            operations(contentSplitted, caseVectorRemove, "-");
         }
         i++;
     }

@@ -86,4 +86,48 @@ namespace MathParser {
     bool operator==(Token const& a, Token const& b)  {
         return a.TokenText == b.TokenText;
     }
+
+    double operator+(Token const& a, Token const& b)  {
+        try {
+            double v = std::stod(a.TokenText);
+            double v2 = std::stod(b.TokenText);
+            return v + v2;
+        }
+        catch (std::invalid_argument const& ex) {
+            std::cout << "It can not be a double/int value !" << " Final error: " << ex.what() << std::endl;
+        }
+    }
+
+    double operator-(Token const& a, Token const& b)  {
+        try {
+            double v = std::stod(a.TokenText);
+            double v2 = std::stod(b.TokenText);
+            return v - v2;
+        }
+        catch (std::invalid_argument const& ex) {
+            std::cout << "It can not be a double/int value !" << " Final error: " << ex.what() << std::endl;
+        }
+    }
+
+    double operator*(Token const& a, Token const& b)  {
+        try {
+            double v = std::stod(a.TokenText);
+            double v2 = std::stod(b.TokenText);
+            return v * v2;
+        }
+        catch (std::invalid_argument const& ex) {
+            std::cout << "It can not be a double/int value !" << " Final error: " << ex.what() << std::endl;
+        }
+    }
+
+    double operator/(Token const& a, Token const& b)  {
+        try {
+            double v = std::stod(a.TokenText);
+            double v2 = std::stod(b.TokenText);
+            return v / v2;
+        }
+        catch (std::invalid_argument const& ex) {
+            std::cout << "It can not be a double/int value !" << " Final error: " << ex.what() << std::endl;
+        }
+    }
 }

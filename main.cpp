@@ -19,17 +19,22 @@ int main() {
     result = parse(contentMathTokens);
     std::cout << result << std::endl;
 
-    content = "9 / 9";
+    content = "9/9";
     contentMathTokens = MathParser::TokenBuilding::ParserTokens(content);
     result = parse(contentMathTokens);
     std::cout << result << std::endl;
 
-    content = "9 * 9";
+    content = "9* 9";
     contentMathTokens = MathParser::TokenBuilding::ParserTokens(content);
     result = parse(contentMathTokens);
     std::cout << result << std::endl;
 
-    content = "9 + 9";
+    content = "9+9";
+    contentMathTokens = MathParser::TokenBuilding::ParserTokens(content);
+    result = parse(contentMathTokens);
+    std::cout << result << std::endl;
+
+    content = "1+2*3";
     contentMathTokens = MathParser::TokenBuilding::ParserTokens(content);
     result = parse(contentMathTokens);
     std::cout << result << std::endl;

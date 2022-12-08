@@ -30,6 +30,10 @@ namespace MathParser {
         void DebugPrint() const;
 
         friend bool operator==(Token const& a, Token const& b);
+        friend double operator+(Token const& a, Token const& b);
+        friend double operator-(Token const& a, Token const& b);
+        friend double operator*(Token const& a, Token const& b);
+        friend double operator/(Token const& a, Token const& b);
     };
 
     class TokenBuilding {

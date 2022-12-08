@@ -27,8 +27,8 @@ int expectElement(std::vector<MathParser::Token>& array, std::string const& elem
 }
 
 void operations(std::vector<MathParser::Token>& array, int& caseVector, std::string const& op) {
-    double n1 = convertDouble(array[caseVector - 1].TokenText);
-    double n2 = convertDouble(array[caseVector + 1].TokenText);
+    MathParser::Token n1 = array[caseVector - 1];
+    MathParser::Token n2 = array[caseVector + 1];
 
     double result = 0;
 
